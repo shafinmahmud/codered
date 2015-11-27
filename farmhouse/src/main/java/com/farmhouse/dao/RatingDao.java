@@ -2,7 +2,7 @@ package com.farmhouse.dao;
 
 import org.springframework.stereotype.Repository;
 
-import com.farhouse.entity.Rating;
+import com.farmhouse.entity.Rating;
 
 
 @Repository("ratingDao")

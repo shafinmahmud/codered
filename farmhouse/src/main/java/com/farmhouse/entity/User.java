@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.farhouse.entity;
+package com.farmhouse.entity;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,8 +16,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.springframework.stereotype.Component;
 
 /**
@@ -44,9 +51,13 @@ public class User implements Serializable {
     @Column(name = "user_id")
     private Integer userId;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 100)
     @Column(name = "username")
     private String username;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 80)
     @Column(name = "password")
     private String password;
     @Column(name = "enabled")
@@ -57,6 +68,14 @@ public class User implements Serializable {
     private Boolean accountNonExpired;
     @Column(name = "credientials_non_expired")
     private Boolean credientialsNonExpired;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userIdFk")
+    private Collection<Product> productCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userIdFk")
+    private Collection<Rating> ratingCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userIdFk")
+    private Collection<UserProfile> userProfileCollection;
+    @OneToMany(mappedBy = "userId")
+    private Collection<Authorities> authoritiesCollection;
 
     public User() {
     }
@@ -127,6 +146,46 @@ public class User implements Serializable {
         this.credientialsNonExpired = credientialsNonExpired;
     }
 
+    @XmlTransient
+    @JsonIgnore
+    public Collection<Product> getProductCollection() {
+        return productCollection;
+    }
+
+    public void setProductCollection(Collection<Product> productCollection) {
+        this.productCollection = productCollection;
+    }
+
+    @XmlTransient
+    @JsonIgnore
+    public Collection<Rating> getRatingCollection() {
+        return ratingCollection;
+    }
+
+    public void setRatingCollection(Collection<Rating> ratingCollection) {
+        this.ratingCollection = ratingCollection;
+    }
+
+    @XmlTransient
+    @JsonIgnore
+    public Collection<UserProfile> getUserProfileCollection() {
+        return userProfileCollection;
+    }
+
+    public void setUserProfileCollection(Collection<UserProfile> userProfileCollection) {
+        this.userProfileCollection = userProfileCollection;
+    }
+
+    @XmlTransient
+    @JsonIgnore
+    public Collection<Authorities> getAuthoritiesCollection() {
+        return authoritiesCollection;
+    }
+
+    public void setAuthoritiesCollection(Collection<Authorities> authoritiesCollection) {
+        this.authoritiesCollection = authoritiesCollection;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -149,7 +208,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "mo.User[ userId=" + userId + " ]";
+        return "com.farmhouse.entity.User[ userId=" + userId + " ]";
     }
     
 }

@@ -2,7 +2,7 @@ package com.farmhouse.dao;
 
 import org.springframework.stereotype.Repository;
 
-import com.farhouse.entity.Authorities;
+import com.farmhouse.entity.Authorities;
 
 @Repository("authoritiesDao")
 public class AuthoritiesDao extends GenericHibernateDao<Authorities>  {

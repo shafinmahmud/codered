@@ -1,7 +1,8 @@
 package com.farmhouse.dao;
 
 import org.springframework.stereotype.Repository;
-import com.farhouse.entity.User;
+
+import com.farmhouse.entity.User;
 
 
 @Repository("userDao")

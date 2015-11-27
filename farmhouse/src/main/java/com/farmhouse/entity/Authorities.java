@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.farhouse.entity;
+package com.farmhouse.entity;
 
 import java.io.Serializable;
-
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,7 +20,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-
 import org.springframework.stereotype.Component;
 
 /**
@@ -111,7 +109,7 @@ public class Authorities implements Serializable {
 
     @Override
     public String toString() {
-        return "com.farhouse.entity.Authorities[ authorityId=" + authorityId + " ]";
+        return "com.farmhouse.entity.Authorities[ authorityId=" + authorityId + " ]";
     }
     
 }

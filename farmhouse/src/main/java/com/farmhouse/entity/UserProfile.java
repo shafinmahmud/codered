@@ -3,19 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.farhouse.entity;
+package com.farmhouse.entity;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.springframework.stereotype.Component;
 
@@ -30,12 +33,10 @@ import org.springframework.stereotype.Component;
 @NamedQueries({
     @NamedQuery(name = "UserProfile.findAll", query = "SELECT u FROM UserProfile u"),
     @NamedQuery(name = "UserProfile.findByUserProfileId", query = "SELECT u FROM UserProfile u WHERE u.userProfileId = :userProfileId"),
+    @NamedQuery(name = "UserProfile.findByFullName", query = "SELECT u FROM UserProfile u WHERE u.fullName = :fullName"),
     @NamedQuery(name = "UserProfile.findByAddress", query = "SELECT u FROM UserProfile u WHERE u.address = :address"),
-    @NamedQuery(name = "UserProfile.findByContact", query = "SELECT u FROM UserProfile u WHERE u.contact = :contact"),
-    @NamedQuery(name = "UserProfile.findByFirstName", query = "SELECT u FROM UserProfile u WHERE u.firstName = :firstName"),
-    @NamedQuery(name = "UserProfile.findByLastName", query = "SELECT u FROM UserProfile u WHERE u.lastName = :lastName"),
-    @NamedQuery(name = "UserProfile.findByUserPhotoUrl", query = "SELECT u FROM UserProfile u WHERE u.userPhotoUrl = :userPhotoUrl"),
-    @NamedQuery(name = "UserProfile.findByUserIdFk", query = "SELECT u FROM UserProfile u WHERE u.userIdFk = :userIdFk")})
+    @NamedQuery(name = "UserProfile.findByPhoneNumber", query = "SELECT u FROM UserProfile u WHERE u.phoneNumber = :phoneNumber"),
+    @NamedQuery(name = "UserProfile.findByPhotoUrl", query = "SELECT u FROM UserProfile u WHERE u.photoUrl = :photoUrl")})
 public class UserProfile implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -44,24 +45,40 @@ public class UserProfile implements Serializable {
     @Basic(optional = false)
     @Column(name = "user_profile_id")
     private Integer userProfileId;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 80)
+    @Column(name = "full_name")
+    private String fullName;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 200)
     @Column(name = "address")
     private String address;
-    @Column(name = "contact")
-    private String contact;
-    @Column(name = "first_name")
-    private String firstName;
-    @Column(name = "last_name")
-    private String lastName;
-    @Column(name = "user_photo_url")
-    private String userPhotoUrl;
-    @Column(name = "user_id_fk")
-    private BigInteger userIdFk;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 80)
+    @Column(name = "phone_number")
+    private String phoneNumber;
+    @Size(max = 100)
+    @Column(name = "photo_url")
+    private String photoUrl;
+    @JoinColumn(name = "user_id_fk", referencedColumnName = "user_id")
+    @ManyToOne(optional = false)
+    private User userIdFk;
 
     public UserProfile() {
     }
 
     public UserProfile(Integer userProfileId) {
         this.userProfileId = userProfileId;
+    }
+
+    public UserProfile(Integer userProfileId, String fullName, String address, String phoneNumber) {
+        this.userProfileId = userProfileId;
+        this.fullName = fullName;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
     }
 
     public Integer getUserProfileId() {
@@ -72,6 +89,14 @@ public class UserProfile implements Serializable {
         this.userProfileId = userProfileId;
     }
 
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
     public String getAddress() {
         return address;
     }
@@ -80,43 +105,27 @@ public class UserProfile implements Serializable {
         this.address = address;
     }
 
-    public String getContact() {
-        return contact;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setContact(String contact) {
-        this.contact = contact;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getPhotoUrl() {
+        return photoUrl;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getUserPhotoUrl() {
-        return userPhotoUrl;
-    }
-
-    public void setUserPhotoUrl(String userPhotoUrl) {
-        this.userPhotoUrl = userPhotoUrl;
-    }
-
-    public BigInteger getUserIdFk() {
+    public User getUserIdFk() {
         return userIdFk;
     }
 
-    public void setUserIdFk(BigInteger userIdFk) {
+    public void setUserIdFk(User userIdFk) {
         this.userIdFk = userIdFk;
     }
 
@@ -142,7 +151,7 @@ public class UserProfile implements Serializable {
 
     @Override
     public String toString() {
-        return "mo.UserProfile[ userProfileId=" + userProfileId + " ]";
+        return "com.farmhouse.entity.UserProfile[ userProfileId=" + userProfileId + " ]";
     }
     
 }

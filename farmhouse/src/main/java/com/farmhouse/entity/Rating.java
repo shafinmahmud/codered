@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.farhouse.entity;
+package com.farmhouse.entity;
 
 import java.io.Serializable;
-
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,7 +18,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-
 import org.springframework.stereotype.Component;
 
 /**
@@ -112,7 +110,7 @@ public class Rating implements Serializable {
 
     @Override
     public String toString() {
-        return "com.farhouse.entity.Rating[ ratingId=" + ratingId + " ]";
+        return "com.farmhouse.entity.Rating[ ratingId=" + ratingId + " ]";
     }
     
 }

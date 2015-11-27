@@ -2,7 +2,7 @@ package com.farmhouse.dao;
 
 import org.springframework.stereotype.Repository;
 
-import com.farhouse.entity.Category;
+import com.farmhouse.entity.Category;
 
 @Repository("categoryDao")
 public class CategoryDao extends GenericHibernateDao<Category>{

@@ -2,7 +2,7 @@ package com.farmhouse.dao;
 
 import org.springframework.stereotype.Repository;
 
-import com.farhouse.entity.District;
+import com.farmhouse.entity.District;
 
 
 @Repository("districtDao")

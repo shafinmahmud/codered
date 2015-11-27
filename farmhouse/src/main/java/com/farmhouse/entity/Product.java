@@ -3,11 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.farhouse.entity;
+package com.farmhouse.entity;
 
 import java.io.Serializable;
 import java.util.Date;
-
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,7 +22,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-
 import org.springframework.stereotype.Component;
 
 /**
@@ -199,7 +197,7 @@ public class Product implements Serializable {
 
     @Override
     public String toString() {
-        return "com.farhouse.entity.Product[ productId=" + productId + " ]";
+        return "com.farmhouse.entity.Product[ productId=" + productId + " ]";
     }
     
 }

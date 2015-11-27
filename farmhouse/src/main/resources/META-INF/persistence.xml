@@ -13,6 +13,16 @@
     <class>com.farhouse.entity.District</class>
     <class>com.farhouse.entity.Crop</class>
     <class>com.farhouse.entity.User_1</class>
+    <class>com.farmhouse.entity.UserProfile</class>
+    <class>com.farmhouse.entity.Category</class>
+    <class>com.farmhouse.entity.Division</class>
+    <class>com.farmhouse.entity.SubCategory</class>
+    <class>com.farmhouse.entity.Rating</class>
+    <class>com.farmhouse.entity.User</class>
+    <class>com.farmhouse.entity.Authorities</class>
+    <class>com.farmhouse.entity.Product</class>
+    <class>com.farmhouse.entity.Crop</class>
+    <class>com.farmhouse.entity.District</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/farmhouse?zeroDateTimeBehavior=convertToNull"/>
