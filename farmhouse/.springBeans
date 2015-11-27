@@ -10,6 +10,7 @@
 		<config>src/main/webapp/WEB-INF/servlet-context.xml</config>
 		<config>src/main/webapp/WEB-INF/app-dao.xml</config>
 		<config>src/main/webapp/WEB-INF/app-security.xml</config>
+		<config>src/main/webapp/WEB-INF/app-service.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
