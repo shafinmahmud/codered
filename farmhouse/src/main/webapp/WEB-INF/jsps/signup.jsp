@@ -5,6 +5,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,18 +30,25 @@
 
 <div class="container">
     <div class="col-md-3">
-      <form id="signUp" action="${pageContext.request.contextPath}/createaccount">
+      <sf:form id="signUp" action="${pageContext.request.contextPath}/createaccount" commandName="signUpBean">
        
-         <input type="text" name="username">
-         <input type="text" name="password">
-         <input type="text" name="fullName">
-         <input type="text" name="address">
-         <input type="text" name="fullName">
-         <input type="text" name="url">
+         <sf:input type="text" name="username" placeholder = "username" path="username"/>
+         <sf:errors path="username" class="alert-danger"></sf:errors>
+         <sf:input type="text" name="password" placeholder = "password" path="password"/>
+         <sf:errors path="password"></sf:errors>
+         <sf:input type="text" name="fullName" placeholder = "fullname" path="fullName" />
+         <sf:errors path="fullName"></sf:errors>
+         <sf:input type="text" name="address" placeholder = "address" path="address" />
+         <sf:errors path="address"></sf:errors>
+         <sf:input type="text" name="fullName" placeholder = "fullname" path="fullName"/>
+         <sf:errors path="fullName"></sf:errors>
+         <sf:input type="text" name="phoneNumber" placeholder = "phonm" path="phoneNumber" />
+         <sf:errors path="phoneNumber"></sf:errors>
+         <input type="text" name="url" placeholder = "url">
          
          <button type="submit">submit</button>
        
-    </form>
+    </sf:form>
     </div>
 </div>
 

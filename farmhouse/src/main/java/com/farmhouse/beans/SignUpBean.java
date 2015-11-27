@@ -1,11 +1,24 @@
 package com.farmhouse.beans;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class SignUpBean {
 
+	@NotNull
+	@Size(min = 4, max = 80, message = "৪ থেকে ৮০ অক্ষরের মধ্যে একটি ইউজার নেম দিন")
 	private String username;
+	@NotNull
+	@Size(min = 4, max = 40 , message = "৪ থেকে ৮০ অক্ষরের মধ্যে একটি পাসওয়ার্ড দিন")
 	private String password;
+	@NotNull
+	@Size(min  = 4, max = 70, message ="আপনার পূর্ণ নাম লিখুন")
 	private String fullName;
+	@NotNull
+	@Size(min=4,max = 100, message="আপনার ঠিকানা দিন ")
 	private String address;
+	@NotNull
+	@Size(min = 11, max=11,message="একটি বৈধ ফোন নাম্বার দিন" )
 	private String phoneNumber;
 	private String url;
 
