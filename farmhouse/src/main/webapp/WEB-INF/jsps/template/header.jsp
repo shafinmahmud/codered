@@ -17,7 +17,8 @@ ul li{
   
   background-color: #6AC140;
   border-radius:0.4em;
-  text-align:center;"
+  text-align:center;
+  cursor:pointer;
   
 }
 
@@ -26,6 +27,15 @@ ul li{
  position: absolute;
 
 }
+a{
+   cursor: pointer;
+}
+a:link    {color:green; background-color:transparent; text-decoration:none}
+a:visited {color:pink; background-color:transparent; text-decoration:none;}
+a:hover   {color:red; background-color:transparent; text-decoration:underline}
+a:active  {color:yellow; background-color:transparent; text-decoration:underline}
+
+
 </style>
 </head>
 <body>
@@ -57,25 +67,14 @@ ul li{
     <div class="row">
        <div class="left col-md-offset-1 col-md-2">
           <div class="well">
-             <h3 class="heading">ফসল</h3>
-             <ul style="text-align:center;">
-               <li><a>ধান</a></li>
-               <li><a>তেল জাতীয় ফসল</a></li>
-               <li><a>শস্য জাতীয় ফসল</a></li>
-               <li><a>ডাল জাতীয় ফসল</a></li>
-             </ul>
-             <h3 class="heading">ফলমূল</h3>
-             <ul style="text-align:center;">
-               <li>শীতকালীন ফল </li>
-               <li>গ্রীষ্মকালীন ফল</li>
-               <li>বারোমাসি ফল</li>
-             </ul>
-             <h3 class="heading">সবজি</h3>
-             <ul style="text-align:center;">
-               <li>শীতকালীন সবজি</li>
-               <li>গ্রীষ্মকালীন সবজি</li>
-               <li>বারোমাসি সবজি</li>
-             </ul>
+             <h3 class="heading" data-id="crops">ফসল</h3>
+             
+             <h3 class="heading" data-id="fruits">ফলমূল</h3>
+            
+             <h3 class="heading" data-id="vegetables">সবজি</h3>
+             
+             <h3 class="heading" data-id="districts">জেলা</h3>
+            
           </div>  
        </div>
        <div class="right col-md-offset-3 col-md-8">
@@ -85,5 +84,7 @@ ul li{
        </div>
     </div>
 </div>
+
+
 </body>
 </html>

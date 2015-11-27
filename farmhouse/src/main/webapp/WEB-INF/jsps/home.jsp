@@ -19,14 +19,46 @@
 	src="${pageContext.request.contextPath}/resources/javascript/jquery-1.11.3.min.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/javascript/bootstrap.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/javascript/myscript.js"></script>
+
 
 </head>
 <body>
 <%@ include file="/WEB-INF/jsps/template/header.jsp" %>
 
 
+<script type="text/javascript">
+
+ $(document).ready(function(){
+	 
+	 $('h3').on('click',function(){
+		 
+		 var type= $(this).data('id').trim();
+		 $.ajax({
+				
+				url: '${pageContext.request.contextPath}/categories/type',
+				type:'GET',
+		       // dataType:'json',
+				success: function(data){
+					console.log(data);
+					
+				},
+				statusCode: { 
+					404: function() {
+					    console.log("no data found");
+				    }
+					    
+				},
+				error : function(data,status,er) {
+					
+					console.log("error");
+					
+				}
+			});
+		 
+	 });
+	 
+ });
+</script>
 </body>
 
 
