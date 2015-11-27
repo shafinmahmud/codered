@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.StringUtils;
 
 import com.farmhouse.entity.User;
+import com.farmhouse.service.UserService;
 
 
 public class DatabaseAuthenticationProvider extends
@@ -19,8 +20,8 @@ public class DatabaseAuthenticationProvider extends
 		System.out.println("Database Authentication Provider Initialized!!");
 	}
 
-//	@Autowired
-//	private UserService userService;
+	@Autowired
+	private UserService userService;
 
 	@Override
 	protected void additionalAuthenticationChecks(UserDetails userDetails,

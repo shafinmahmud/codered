@@ -19,11 +19,9 @@
   
   <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-2.1.1.min.js"></script>
   <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-ui.min.js"></script>
-
-<!--Import jQuery before materialize.js-->
   <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/materialize.min.js"></script>
 
-  <!--Let browser know website is optimized for mobile-->
+  
  
 
   <style type="text/css">
