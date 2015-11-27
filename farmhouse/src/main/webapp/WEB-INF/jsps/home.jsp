@@ -23,7 +23,9 @@
 
 </head>
 <body>
-<%@ include file="/WEB-INF/jsps/template/header.jsp" %>
+<c:forEach var="category" items="${categories}">
+    <c:if test="${category.categoryName}=="""></c:if>
+</c:forEach>
 
 
 <script type="text/javascript">

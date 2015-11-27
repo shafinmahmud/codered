@@ -21,6 +21,11 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 	}
 
 	@SuppressWarnings("unchecked")
+	public boolean isExits(long id){
+		return (T) getCurrentSession().get(clazz, id) != null;
+	}
+	
+	@SuppressWarnings("unchecked")
 	public T findOne(long id) {
 		return (T) getCurrentSession().get(clazz, id);
 	}
