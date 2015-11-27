@@ -13,20 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.farmhouse.beans.CategoryBean;
 
-
-
-@Controller
-@RequestMapping("category")
-public class CategoryController {
-
+@RestController
+@RequestMapping("sort")
+public class SortController {
 	
-
-	// -------------------Retrieve Categories----------------------
-	@RequestMapping(value = "/categories/{type}", method = RequestMethod.GET)
-	public ResponseEntity<List<CategoryBean>> listAllBooks(@PathVariable("type") String type) {
+	@RequestMapping(value = "/sort/{sortId}", method = RequestMethod.GET)
+	public ResponseEntity<List<CategoryBean>> listAllBooks(@PathVariable("sortId") String sortId) {
+		
 	
 		
-		System.out.println("requesting for this type: " + type);
+		
 		
 		List<CategoryBean> categories = new ArrayList<>();
 		
@@ -40,16 +36,7 @@ public class CategoryController {
 	
 		return new ResponseEntity<List<CategoryBean>>(categories, HttpStatus.OK);
 	}
-
-
 	
-	
-	
-	
-	
-	
-	
-
 	
 
 }

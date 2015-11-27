@@ -40,8 +40,6 @@
          <sf:errors path="fullName"></sf:errors>
          <sf:input type="text" name="address" placeholder = "address" path="address" />
          <sf:errors path="address"></sf:errors>
-         <sf:input type="text" name="fullName" placeholder = "fullname" path="fullName"/>
-         <sf:errors path="fullName"></sf:errors>
          <sf:input type="text" name="phoneNumber" placeholder = "phonm" path="phoneNumber" />
          <sf:errors path="phoneNumber"></sf:errors>
          <input type="text" name="url" placeholder = "url">

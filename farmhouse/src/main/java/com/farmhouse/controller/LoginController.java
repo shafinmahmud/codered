@@ -24,7 +24,7 @@ public class LoginController {
 	public String showSignUp(Model model,@Valid SignUpBean signUpBean,
 			BindingResult result){
        
-		//model.addAttribute(new SignUpBean());
+		model.addAttribute(new SignUpBean());
 		return "signup";
 	}
 	
@@ -38,6 +38,8 @@ public class LoginController {
 			
 			return "signup";
 		}
+		
+		
 
 		
 		return null;

@@ -6,11 +6,14 @@
 package com.farmhouse.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,16 +21,17 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-import org.codehaus.jackson.annotate.JsonIgnore;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 /**
  *
- * @author SHAFIN
+ * @author sss
  */
 @Component
 @Entity
@@ -41,23 +45,18 @@ import org.springframework.stereotype.Component;
     @NamedQuery(name = "User.findByEnabled", query = "SELECT u FROM User u WHERE u.enabled = :enabled"),
     @NamedQuery(name = "User.findByAccountNonLocked", query = "SELECT u FROM User u WHERE u.accountNonLocked = :accountNonLocked"),
     @NamedQuery(name = "User.findByAccountNonExpired", query = "SELECT u FROM User u WHERE u.accountNonExpired = :accountNonExpired"),
-    @NamedQuery(name = "User.findByCredientialsNonExpired", query = "SELECT u FROM User u WHERE u.credientialsNonExpired = :credientialsNonExpired")})
-public class User implements Serializable {
-
+    @NamedQuery(name = "User.findByCredentialsNonExpired", query = "SELECT u FROM User u WHERE u.credentialsNonExpired = :credentialsNonExpired")})
+public class User implements Serializable,UserDetails {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "user_id")
-    private Integer userId;
+    private Long userId;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
     @Column(name = "username")
     private String username;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 80)
     @Column(name = "password")
     private String password;
     @Column(name = "enabled")
@@ -67,34 +66,36 @@ public class User implements Serializable {
     @Column(name = "account_non_expired")
     private Boolean accountNonExpired;
     @Column(name = "credientials_non_expired")
-    private Boolean credientialsNonExpired;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userIdFk")
-    private Collection<Product> productCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userIdFk")
-    private Collection<Rating> ratingCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userIdFk")
-    private Collection<UserProfile> userProfileCollection;
-    @OneToMany(mappedBy = "userId")
-    private Collection<Authorities> authoritiesCollection;
+    private Boolean credentialsNonExpired;
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, mappedBy = "userId")
+    private List<Authorities> authoritiesList;
+    
+
 
     public User() {
     }
 
-    public User(Integer userId) {
+    public User(Long userId) {
         this.userId = userId;
     }
 
-    public User(Integer userId, String username, String password) {
-        this.userId = userId;
-        this.username = username;
-        this.password = password;
-    }
+    public User(Long userId, String username, String password, boolean enabled,
+			boolean accountNonLocked, boolean accountNonExpired,
+			boolean credentialsNonExpired) {
+		this.userId = userId;
+		this.username = username;
+		this.password = password;
+		this.enabled = enabled;
+		this.accountNonLocked = accountNonLocked;
+		this.accountNonExpired = accountNonExpired;
+		this.credentialsNonExpired = credentialsNonExpired;
+	}
 
-    public Integer getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
@@ -138,52 +139,21 @@ public class User implements Serializable {
         this.accountNonExpired = accountNonExpired;
     }
 
-    public Boolean getCredientialsNonExpired() {
-        return credientialsNonExpired;
+    public Boolean getCredentialsNonExpired() {
+        return credentialsNonExpired;
     }
 
-    public void setCredientialsNonExpired(Boolean credientialsNonExpired) {
-        this.credientialsNonExpired = credientialsNonExpired;
-    }
-
-    @XmlTransient
-    @JsonIgnore
-    public Collection<Product> getProductCollection() {
-        return productCollection;
-    }
-
-    public void setProductCollection(Collection<Product> productCollection) {
-        this.productCollection = productCollection;
+    public void setCredentialsNonExpired(Boolean credentialsNonExpired) {
+        this.credentialsNonExpired = credentialsNonExpired;
     }
 
     @XmlTransient
-    @JsonIgnore
-    public Collection<Rating> getRatingCollection() {
-        return ratingCollection;
+    public List<Authorities> getAuthoritiesList() {
+        return authoritiesList;
     }
 
-    public void setRatingCollection(Collection<Rating> ratingCollection) {
-        this.ratingCollection = ratingCollection;
-    }
-
-    @XmlTransient
-    @JsonIgnore
-    public Collection<UserProfile> getUserProfileCollection() {
-        return userProfileCollection;
-    }
-
-    public void setUserProfileCollection(Collection<UserProfile> userProfileCollection) {
-        this.userProfileCollection = userProfileCollection;
-    }
-
-    @XmlTransient
-    @JsonIgnore
-    public Collection<Authorities> getAuthoritiesCollection() {
-        return authoritiesCollection;
-    }
-
-    public void setAuthoritiesCollection(Collection<Authorities> authoritiesCollection) {
-        this.authoritiesCollection = authoritiesCollection;
+    public void setAuthoritiesList(List<Authorities> authoritiesList) {
+        this.authoritiesList = authoritiesList;
     }
 
     @Override
@@ -208,7 +178,43 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "com.farmhouse.entity.User[ userId=" + userId + " ]";
+        return "com.great.cms.db.entity.User[ userId=" + userId + " ]";
     }
+
+   
+
+    @Override
+	public boolean isAccountNonExpired() {
+		return accountNonExpired;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return accountNonLocked;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return credentialsNonExpired;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	@Override
+	public List<GrantedAuthority> getAuthorities() {
+		
+		List<GrantedAuthority> authorities = new ArrayList<>();
+
+		for (Authorities authority : this.authoritiesList) {
+			authorities.add(new SimpleGrantedAuthority(authority.getRole()));
+		}
+		return authorities;
+
+	}
+	
+	
     
 }

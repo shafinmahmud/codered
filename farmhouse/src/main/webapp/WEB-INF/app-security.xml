@@ -7,6 +7,41 @@
 
 
 
+      
+      <security:http auto-config="true" use-expressions="true">
+		<security:form-login login-page="/login"
+			authentication-failure-url="/login?error=true"
+			authentication-success-handler-ref="authenticationSuccessHandler" />
+
+		<security:intercept-url pattern="/" access="permitAll"/>
+		<security:intercept-url pattern="/login" access="permitAll"/>
+		<security:intercept-url pattern="/signup" access="permitAll"/>
+		<security:intercept-url pattern="/sort" access="permitAll"/>
+		<security:intercept-url pattern="/createaccount" access="permitAll"/>
+		<security:intercept-url pattern="/resources/**" access="permitAll"/>
+		
+		<security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
+		<security:intercept-url pattern="/**" access="denyAll"/>
+
+
+		<security:logout logout-url="/j_spring_security_logout"
+			logout-success-url="/login" />
+	</security:http>
+
+
+
+	<security:authentication-manager>
+		<security:authentication-provider
+			ref="databaseAuthenticationProvider">
+		</security:authentication-provider>
+	</security:authentication-manager>
+	
+	<bean id="databaseAuthenticationProvider"
+		class="com.farmhouse.security.DatabaseAuthenticationProvider">
+	</bean>
+	
+	<bean id="authenticationSuccessHandler"
+		class="com.farmhouse.security.SecurityAuthenticationSuccessHandler" />
 	
 	
 	
